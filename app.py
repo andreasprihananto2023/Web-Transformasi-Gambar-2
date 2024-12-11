@@ -50,6 +50,7 @@ def main():
     st.session_state.page = page
 
     if st.session_state.page == "Home Page":
+        st.image("logo_pu.jpg", caption="Gambar Selamat Datang", use_column_width=True)
         st.title("Selamat Datang di Website Transformasi Gambar Group 7")
         st.write("Website ini memungkinkan untuk mengunggah gambar dan menerapkan berbagai transformasi Geometrik. Dibuat oleh Andreas, Firdaus, Rizki")
         st.write("Klik tombol di bawah untuk mulai.")
