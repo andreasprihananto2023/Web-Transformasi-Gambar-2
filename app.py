@@ -55,7 +55,7 @@ def main():
 
         with col1:
             # Menampilkan gambar di kolom pertama
-            st.image("logo_pu.jpg", width=100)
+            st.markdown("<div style='text-align: center;'><img src='logo_pu.jpg' style='max-width: 110px;'></div>", unsafe_allow_html=True)
 
         with col2:
             # Menampilkan teks di kolom kedua
