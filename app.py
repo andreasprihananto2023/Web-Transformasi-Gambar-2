@@ -63,7 +63,7 @@ def main():
         
         st.title("Selamat Datang di Website Transformasi Gambar Group 7")    
         st.write("Website ini memungkinkan untuk mengunggah gambar dan menerapkan berbagai transformasi Geometrik. Dibuat oleh Andreas, Firdaus, Rizki")
-        st.empty()
+        st.write(" ")
         col1, col2, col3 = st.columns([1, 1, 1])
 
         with col1:
