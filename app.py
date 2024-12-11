@@ -51,7 +51,7 @@ def main():
 
     if st.session_state.page == "Home Page":
         # Membuat dua kolom
-        col1, col2 = st.columns([1.5, 2])  # Kolom 1 lebih kecil dari kolom 2
+        col1, col2 = st.columns([1.1, 2])  # Kolom 1 lebih kecil dari kolom 2
 
         with col1:
             # Menampilkan gambar di kolom pertama
