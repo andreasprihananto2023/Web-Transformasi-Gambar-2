@@ -44,8 +44,8 @@ def main():
     page = st.sidebar.radio("Pilih Halaman", ["Landing Page", "Transformasi Gambar"])
 
     if page == "Landing Page":
-        st.title("Selamat Datang di Aplikasi Transformasi Gambar")
-        st.write("Aplikasi ini memungkinkan Anda untuk mengunggah gambar dan menerapkan berbagai transformasi.")
+        st.title("Selamat Datang di Website Transformasi Gambar Group 7")
+        st.write("Aplikasi ini memungkinkan Anda untuk mengunggah gambar dan menerapkan berbagai transformasi. Dibuat oleh Andreas, Firdaus, dan Rizki")
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
             st.session_state.page = "Transformasi Gambar"
