@@ -55,7 +55,7 @@ def main():
 
         with col1:
             # Menampilkan gambar di kolom pertama
-            st.image("logo_pu.jpg", caption="President University", width=100)
+            st.image("logo_pu.jpg", caption="President University", width=120)
 
         with col2:
             # Menampilkan teks di kolom kedua
