@@ -59,8 +59,10 @@ def main():
 
         with col2:
             # Menampilkan teks di kolom kedua
-            st.title("Selamat Datang di Website Transformasi Gambar Group 7")
-            
+            st.markdown("<h1 style='font-size: 36px;'>PRESIDENT UNIVERSITY</h1>", unsafe_allow_html=True)
+            st.markdown("<h2 style='font-size: 28px;'>Teknik Industri - Fakultas Teknik</h2>", unsafe_allow_html=True)
+        
+        st.title("Selamat Datang di Website Transformasi Gambar Group 7")    
         st.write("Website ini memungkinkan untuk mengunggah gambar dan menerapkan berbagai transformasi Geometrik. Dibuat oleh Andreas, Firdaus, Rizki")
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
