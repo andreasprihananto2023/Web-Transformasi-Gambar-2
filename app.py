@@ -66,39 +66,70 @@ def main():
         st.title("Transformasi Gambar")
         uploaded_file = st.file_uploader("Unggah Gambar", type=["jpg", "jpeg", "png"])
         if uploaded_file is not None:
+            # Decode gambar
             gambar_asli = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
             gambar_asli = compress_image(gambar_asli)
 
-            st.image(cv2.cvtColor(gambar_asli, cv2.COLOR_BGR2RGB), caption="Gambar Asli", use_container_width=True)
+            # Kolom untuk menampilkan gambar asli dan hasil transformasi
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.image(cv2.cvtColor(gambar_asli, cv2.COLOR_BGR2RGB), caption="Gambar Asli", use_container_width=True)
 
+            # Pilih jenis transformasi dengan dropdown
             transform_type = st.selectbox("Pilih Jenis Transformasi", ["translasi", "rotasi", "skala", "distorsi"])
 
+            # Real-time transformasi dengan slider
             if transform_type == "translasi":
-                dx = st.number_input("Masukkan nilai translasi X (dx)", value=0)
-                dy = st.number_input("Masukkan nilai translasi Y (dy)", value=0)
-                if st.button("Terapkan Transformasi"):
-                    gambar_transformed = transform_image(gambar_asli, transform_type, dx=dx, dy=dy)
-                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), caption="Gambar Setelah Translasi", use_container_width=True)
+                # Slider untuk translasi
+                dx = st.slider("Translasi X (dx)", min_value=-200, max_value=200, value=0, step=10)
+                dy = st.slider("Translasi Y (dy)", min_value=-200, max_value=200, value=0, step=10)
+                
+                # Transformasi real-time
+                gambar_transformed = transform_image(gambar_asli, transform_type, dx=dx, dy=dy)
+                
+                with col2:
+                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), 
+                             caption=f"Translasi (dx={dx}, dy={dy})", 
+                             use_container_width=True)
 
             elif transform_type == "rotasi":
-                sudut = st.number_input("Masukkan sudut rotasi (dalam derajat)", value=0)
-                if st.button("Terapkan Transformasi"):
-                    gambar_transformed = transform_image(gambar_asli, transform_type, sudut=sudut)
-                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), caption="Gambar Setelah Rotasi", use_container_width=True)
+                # Slider untuk rotasi
+                sudut = st.slider("Sudut Rotasi (derajat)", min_value=-180, max_value=180, value=0, step=10)
+                
+                # Transformasi real-time
+                gambar_transformed = transform_image(gambar_asli, transform_type, sudut=sudut)
+                
+                with col2:
+                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), 
+                             caption=f"Rotasi (sudut={sudut}°)", 
+                             use_container_width=True)
 
             elif transform_type == "skala":
-                skala_x = st.number_input("Masukkan skala X", value=1.0)
-                skala_y = st.number_input("Masukkan skala Y", value=1.0)
-                if st.button("Terapkan Transformasi"):
-                    gambar_transformed = transform_image(gambar_asli, transform_type, skala_x=skala_x, skala_y=skala_y)
-                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), caption="Gambar Setelah Skala", use_container_width=True)
+                # Slider untuk skala
+                skala_x = st.slider("Skala X", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
+                skala_y = st.slider("Skala Y", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
+                
+                # Transformasi real-time
+                gambar_transformed = transform_image(gambar_asli, transform_type, skala_x=skala_x, skala_y=skala_y)
+                
+                with col2:
+                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), 
+                             caption=f"Skala (x={skala_x}, y={skala_y})", 
+                             use_container_width=True)
 
             elif transform_type == "distorsi":
-                skew_x = st.number_input("Masukkan nilai distorsi X", value=0.0)
-                skew_y = st.number_input("Masukkan nilai distorsi Y", value=0.0)
-                if st.button("Terapkan Transformasi"):
-                    gambar_transformed = transform_image(gambar_asli, transform_type, skew_x=skew_x, skew_y=skew_y)
-                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), caption="Gambar Setelah Distorsi", use_container_width=True)
+                # Slider untuk distorsi
+                skew_x = st.slider("Distorsi X", min_value=-0.5, max_value=0.5, value=0.0, step=0.1)
+                skew_y = st.slider("Distorsi Y", min_value=-0.5, max_value=0.5, value=0.0, step=0.1)
+                
+                # Transformasi real-time
+                gambar_transformed = transform_image(gambar_asli, transform_type, skew_x=skew_x, skew_y=skew_y)
+                
+                with col2:
+                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), 
+                             caption=f"Distorsi (x={skew_x}, y={skew_y})", 
+                             use_container_width=True)
 
 if __name__ == "__main__":
     main()
