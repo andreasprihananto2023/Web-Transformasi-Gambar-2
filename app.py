@@ -51,11 +51,11 @@ def main():
 
     if st.session_state.page == "Home Page":
         # Membuat dua kolom
-        col1, col2 = st.columns([1.1, 2])  # Kolom 1 lebih kecil dari kolom 2
+        col1, col2 = st.columns([1, 2])  # Kolom 1 lebih kecil dari kolom 2
 
         with col1:
             # Menampilkan gambar di kolom pertama
-            st.image("logo_pu.jpg", caption="President University", width=120)
+            st.image("logo_pu.jpg", caption="President University", width=100)
 
         with col2:
             # Menampilkan teks di kolom kedua
