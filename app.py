@@ -44,6 +44,11 @@ def main():
     if 'page' not in st.session_state:
         st.session_state.page = "Landing Page"
 
+    page = st.sidebar.radio("Pilih Halaman", ["Landing Page", "Transformasi Gambar"], index=["Landing Page", "Transformasi Gambar"].index(st.session_state.page))
+    
+    # Update session state with the selected page
+    st.session_state.page = page
+
     if st.session_state.page == "Landing Page":
         st.title("Selamat Datang di Aplikasi Transformasi Gambar")
         st.write("Aplikasi ini memungkinkan Anda untuk mengunggah gambar dan menerapkan berbagai transformasi.")
@@ -52,7 +57,7 @@ def main():
             st.session_state.page = "Transformasi Gambar"
             st.experimental_rerun()
 
-    elif page == "Transformasi Gambar":
+    elif st.session_state.page == "Transformasi Gambar":
         st.title("Transformasi Gambar")
         uploaded_file = st.file_uploader("Unggah Gambar", type=["jpg", "jpeg", "png"])
         if uploaded_file is not None:
