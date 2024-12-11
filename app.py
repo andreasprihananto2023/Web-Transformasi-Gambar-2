@@ -39,19 +39,18 @@ def transform_image(image, transform_type, **kwargs):
         matriks_distorsi = cv2.getPerspectiveTransform(pts1, pts2)
         return cv2.warpPerspective(image, matriks_distorsi, (w, h))
 
-def main():
+ef main():
     st.sidebar.title("Navigasi")
     if 'page' not in st.session_state:
         st.session_state.page = "Landing Page"
 
-    page = st.sidebar.radio("Pilih Halaman", ["Landing Page", "Transformasi Gambar"], index=["Landing Page", "Transformasi Gambar"].index(st.session_state.page))
-
-    if page == "Landing Page":
+    if st.session_state.page == "Landing Page":
         st.title("Selamat Datang di Aplikasi Transformasi Gambar")
         st.write("Aplikasi ini memungkinkan Anda untuk mengunggah gambar dan menerapkan berbagai transformasi.")
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
             st.session_state.page = "Transformasi Gambar"
+            st.experimental_rerun()
 
     elif page == "Transformasi Gambar":
         st.title("Transformasi Gambar")
