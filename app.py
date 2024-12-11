@@ -55,7 +55,7 @@ def main():
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
             st.session_state.page = "Transformasi Gambar"
-            st.experimental_rerun()
+            st.rerun()
 
     elif st.session_state.page == "Transformasi Gambar":
         st.title("Transformasi Gambar")
