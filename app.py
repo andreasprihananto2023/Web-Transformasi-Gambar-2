@@ -141,6 +141,16 @@ def main():
                     st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), 
                              caption=f"Distorsi (x={skew_x}, y={skew_y})", 
                              use_container_width=True)
+            if gambar_transformed is not None:
+                # Simpan gambar yang ditransformasikan ke dalam buffer
+                _, buffer = cv2.imencode('.png', gambar_transformed)
+                img_bytes = buffer.tobytes()
 
+                # Tombol untuk mengunduh gambar
+                st.download_button(
+                    label="Unduh Gambar yang Ditrasformasikan",
+                    data=img_bytes,
+                    file_name="gambar_transformed.png",
+                    mime="image/png"
 if __name__ == "__main__":
     main()
