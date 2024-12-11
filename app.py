@@ -58,6 +58,11 @@ def main():
             st.rerun()
 
     elif st.session_state.page == "Transformasi Gambar":
+        # Tambahkan tombol kembali ke halaman utama
+        if st.button("Kembali ke Halaman Utama"):
+            st.session_state.page = "Landing Page"
+            st.rerun()
+
         st.title("Transformasi Gambar")
         uploaded_file = st.file_uploader("Unggah Gambar", type=["jpg", "jpeg", "png"])
         if uploaded_file is not None:
