@@ -41,87 +41,55 @@ def transform_image(image, transform_type, **kwargs):
 
 def main():
     st.sidebar.title("Navigasi")
-    page = st.sidebar.radio("Pilih Halaman", ["Home Page", "Transformasi Gambar"])
+    if 'page' not in st.session_state:
+        st.session_state.page = "Landing Page"
 
-    if page == "Home Page":
-        st.title("Selamat Datang di Website Transformasi Gambar Group 7")
-        st.write("Website ini memungkinkan Anda untuk mengunggah gambar dan menerapkan berbagai transformasi. Dibuat oleh Andreas, Firdaus, dan Rizki")
+    page = st.sidebar.radio("Pilih Halaman", ["Landing Page", "Transformasi Gambar"], index=["Landing Page", "Transformasi Gambar"].index(st.session_state.page))
+
+    if page == "Landing Page":
+        st.title("Selamat Datang di Aplikasi Transformasi Gambar")
+        st.write("Aplikasi ini memungkinkan Anda untuk mengunggah gambar dan menerapkan berbagai transformasi.")
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
             st.session_state.page = "Transformasi Gambar"
-            st.experimental_rerun()
 
     elif page == "Transformasi Gambar":
-        st.title("Transformasi Gambar Progress Group 7")
-
-        # Unggah file
-        unggah_file = st.file_uploader(
-            "Unggah gambar dalam format JPEG atau PNG", 
-            type=["jpg", "jpeg", "png"]
-        )
-
-        if unggah_file is not None:
-            # Baca dan kompres gambar
-            file_bytes = np.asarray(bytearray(unggah_file.read()), dtype=np.uint8)
-            gambar_asli = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
+        st.title("Transformasi Gambar")
+        uploaded_file = st.file_uploader("Unggah Gambar", type=["jpg", "jpeg", "png"])
+        if uploaded_file is not None:
+            gambar_asli = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
             gambar_asli = compress_image(gambar_asli)
 
-            # Layout dengan gambar asli
-            st.subheader("Gambar Asli")
             st.image(cv2.cvtColor(gambar_asli, cv2.COLOR_BGR2RGB), caption="Gambar Asli", use_container_width=True)
 
-            # Pilih jenis transformasi
-            transform_type = st.radio(
-                "Pilih Jenis Transformasi",
-                ['Translasi', 'Rotasi', 'Skala', 'Distorsi']
-            )
+            transform_type = st.selectbox("Pilih Jenis Transformasi", ["translasi", "rotasi", "skala", "distorsi"])
 
-            # Pengaturan transformasi
-            st.subheader("Pilih Pengaturan Transformasi")
-            if transform_type == 'Translasi':
-                dx = st.slider("Translasi Horizontal (dx)", -200, 200, 50)
-                dy = st.slider("Translasi Vertikal (dy)", -200, 200, 30)
-                gambar_transformasi = transform_image(
-                    gambar_asli, 
-                    'translasi',
-                                    dx=dx, 
-                    dy=dy
-                )
+            if transform_type == "translasi":
+                dx = st.number_input("Masukkan nilai translasi X (dx)", value=0)
+                dy = st.number_input("Masukkan nilai translasi Y (dy)", value=0)
+                if st.button("Terapkan Transformasi"):
+                    gambar_transformed = transform_image(gambar_asli, transform_type, dx=dx, dy=dy)
+                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), caption="Gambar Setelah Translasi", use_container_width=True)
 
-            elif transform_type == 'Rotasi':
-                sudut = st.slider("Sudut Rotasi (derajat)", -180, 180, 45)
-                gambar_transformasi = transform_image(
-                    gambar_asli, 
-                    'rotasi', 
-                    sudut=sudut
-                )
+            elif transform_type == "rotasi":
+                sudut = st.number_input("Masukkan sudut rotasi (dalam derajat)", value=0)
+                if st.button("Terapkan Transformasi"):
+                    gambar_transformed = transform_image(gambar_asli, transform_type, sudut=sudut)
+                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), caption="Gambar Setelah Rotasi", use_container_width=True)
 
-            elif transform_type == 'Skala':
-                skala_x = st.slider("Skala Horizontal", 0.5, 3.0, 1.5)
-                skala_y = st.slider("Skala Vertikal", 0.5, 3.0, 1.5)
-                gambar_transformasi = transform_image(
-                    gambar_asli, 
-                    'skala', 
-                    skala_x=skala_x, 
-                    skala_y=skala_y
-                )
+            elif transform_type == "skala":
+                skala_x = st.number_input("Masukkan skala X", value=1.0)
+                skala_y = st.number_input("Masukkan skala Y", value=1.0)
+                if st.button("Terapkan Transformasi"):
+                    gambar_transformed = transform_image(gambar_asli, transform_type, skala_x=skala_x, skala_y=skala_y)
+                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), caption="Gambar Setelah Skala", use_container_width=True)
 
-            elif transform_type == 'Distorsi':
-                skew_x = st.slider("Distorsi Horizontal", 0.0, 2.0, 1.5)
-                skew_y = st.slider("Distorsi Vertikal", 0.0, 2.0, 0.5)
-                gambar_transformasi = transform_image(
-                    gambar_asli, 
-                    'distorsi', 
-                    skew_x=skew_x, 
-                    skew_y=skew_y
-                )
-
-            # Gambar hasil transformasi
-            st.subheader(f"Gambar Hasil Transformasi ({transform_type})")
-            st.image(
-                cv2.cvtColor(gambar_transformasi, cv2.COLOR_BGR2RGB), 
-                caption=f"Gambar {transform_type}", 
-                use_container_width=True)
+            elif transform_type == "distorsi":
+                skew_x = st.number_input("Masukkan nilai distorsi X", value=0.0)
+                skew_y = st.number_input("Masukkan nilai distorsi Y", value=0.0)
+                if st.button("Terapkan Transformasi"):
+                    gambar_transformed = transform_image(gambar_asli, transform_type, skew_x=skew_x, skew_y=skew_y)
+                    st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), caption="Gambar Setelah Distorsi", use_container_width=True)
 
 if __name__ == "__main__":
     main()
