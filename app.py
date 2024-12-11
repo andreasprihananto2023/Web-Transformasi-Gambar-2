@@ -63,6 +63,13 @@ def main():
         
         st.title("Selamat Datang di Website Transformasi Gambar Group 7")    
         st.write("Website ini memungkinkan untuk mengunggah gambar dan menerapkan berbagai transformasi Geometrik. Dibuat oleh Andreas, Firdaus, Rizki")
+        
+        col1, col2, col 3 = st.columns([1, 1, 1])
+
+        with col1:
+            st.image("foto rizki.jpg", caption="Ahmad Rizki Safei", width=120)
+        with col2:
+            st.image("foto andre.jpg", caption="Andreas Prihananto", width=120)
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
             st.session_state.page = "Transformasi Gambar"
