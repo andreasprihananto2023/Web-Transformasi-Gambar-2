@@ -44,7 +44,7 @@ def main():
     if 'page' not in st.session_state:
         st.session_state.page = "Home Page"
     if "sidebar_state" not in st.session_state:
-    st.session_state.sidebar_state = "collapsed"
+        st.session_state.sidebar_state = "collapsed"
 
     page = st.sidebar.radio("Pilih Halaman", ["Home Page", "Transformasi Gambar"], index=["Home Page", "Transformasi Gambar"].index(st.session_state.page))
     
