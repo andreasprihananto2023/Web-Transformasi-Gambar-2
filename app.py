@@ -41,11 +41,11 @@ def transform_image(image, transform_type, **kwargs):
 
 def main():
     st.sidebar.title("Navigasi")
-    page = st.sidebar.radio("Pilih Halaman", ["Home Page", "Transformasi Gambar"])
+    page = st.sidebar.radio("Pilih Halaman", ["Landing Page", "Transformasi Gambar"])
 
     if page == "Landing Page":
-        st.title("Selamat Datang di Website Transformasi Gambar")
-        st.write("Sebuah Website yang memungkinkan Anda untuk mengunggah gambar dan menerapkan berbagai transformasi. Dibuat oleh Group 7: Andreas, Firdaus, dan Rizki")
+        st.title("Selamat Datang di Aplikasi Transformasi Gambar")
+        st.write("Aplikasi ini memungkinkan Anda untuk mengunggah gambar dan menerapkan berbagai transformasi.")
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
             st.session_state.page = "Transformasi Gambar"
@@ -84,7 +84,7 @@ def main():
                 gambar_transformasi = transform_image(
                     gambar_asli, 
                     'translasi',
-                                        dx=dx, 
+                                    dx=dx, 
                     dy=dy
                 )
 
