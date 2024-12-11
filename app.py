@@ -77,17 +77,7 @@ def main():
                 st.image(cv2.cvtColor(gambar_asli, cv2.COLOR_BGR2RGB), caption="Gambar Asli", use_container_width=True)
 
             # Pilih jenis transformasi dengan dropdown
-            st.write("Pilih Jenis Transformasi:")
-                    if st.button("Translasi"):
-                        transform_type = "translasi"
-                    elif st.button("Rotasi"):
-                        transform_type = "rotasi"
-                    elif st.button("Skala"):
-                         transform_type = "skala"
-                    elif st.button("Distorsi"):
-                          transform_type = "distorsi"
-                    else:
-                          transform_type = None
+            transform_type = st.selectbox("Pilih Jenis Transformasi", ["translasi", "rotasi", "skala", "distorsi"])
 
             # Real-time transformasi dengan slider
             if transform_type == "translasi":
