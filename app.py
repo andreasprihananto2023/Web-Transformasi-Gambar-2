@@ -151,6 +151,6 @@ def main():
                     label="Unduh Gambar yang Ditrasformasikan",
                     data=img_bytes,
                     file_name="gambar_transformed.png",
-                    mime="image/png"
+                    mime="image/png")
 if __name__ == "__main__":
     main()
