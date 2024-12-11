@@ -64,7 +64,7 @@ def main():
         st.title("Selamat Datang di Website Transformasi Gambar Group 7")    
         st.write("Website ini memungkinkan untuk mengunggah gambar dan menerapkan berbagai transformasi Geometrik. Dibuat oleh Andreas, Firdaus, Rizki")
         
-        col1, col2, col 3 = st.columns([1, 1, 1])
+        col1, col2, col3 = st.columns([1, 1, 1])
 
         with col1:
             st.image("foto rizki.jpg", caption="Ahmad Rizki Safei", width=120)
