@@ -84,3 +84,44 @@ def main():
                 gambar_transformasi = transform_image(
                     gambar_asli, 
                     'translasi',
+                                        dx=dx, 
+                    dy=dy
+                )
+
+            elif transform_type == 'Rotasi':
+                sudut = st.slider("Sudut Rotasi (derajat)", -180, 180, 45)
+                gambar_transformasi = transform_image(
+                    gambar_asli, 
+                    'rotasi', 
+                    sudut=sudut
+                )
+
+            elif transform_type == 'Skala':
+                skala_x = st.slider("Skala Horizontal", 0.5, 3.0, 1.5)
+                skala_y = st.slider("Skala Vertikal", 0.5, 3.0, 1.5)
+                gambar_transformasi = transform_image(
+                    gambar_asli, 
+                    'skala', 
+                    skala_x=skala_x, 
+                    skala_y=skala_y
+                )
+
+            elif transform_type == 'Distorsi':
+                skew_x = st.slider("Distorsi Horizontal", 0.0, 2.0, 1.5)
+                skew_y = st.slider("Distorsi Vertikal", 0.0, 2.0, 0.5)
+                gambar_transformasi = transform_image(
+                    gambar_asli, 
+                    'distorsi', 
+                    skew_x=skew_x, 
+                    skew_y=skew_y
+                )
+
+            # Gambar hasil transformasi
+            st.subheader(f"Gambar Hasil Transformasi ({transform_type})")
+            st.image(
+                cv2.cvtColor(gambar_transformasi, cv2.COLOR_BGR2RGB), 
+                caption=f"Gambar {transform_type}", 
+                use_container_width=True)
+
+if __name__ == "__main__":
+    main()
