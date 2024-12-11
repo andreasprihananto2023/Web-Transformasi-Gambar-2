@@ -42,16 +42,16 @@ def transform_image(image, transform_type, **kwargs):
 def main():
     st.sidebar.title("Navigasi")
     if 'page' not in st.session_state:
-        st.session_state.page = "Landing Page"
+        st.session_state.page = "Home Page"
 
-    page = st.sidebar.radio("Pilih Halaman", ["Landing Page", "Transformasi Gambar"], index=["Landing Page", "Transformasi Gambar"].index(st.session_state.page))
+    page = st.sidebar.radio("Pilih Halaman", ["Home Page", "Transformasi Gambar"], index=["Home Page", "Transformasi Gambar"].index(st.session_state.page))
     
     # Update session state with the selected page
     st.session_state.page = page
 
-    if st.session_state.page == "Landing Page":
-        st.title("Selamat Datang di Aplikasi Transformasi Gambar")
-        st.write("Aplikasi ini memungkinkan Anda untuk mengunggah gambar dan menerapkan berbagai transformasi.")
+    if st.session_state.page == "Home Page":
+        st.title("Selamat Datang di Website Transformasi Gambar Group 7")
+        st.write("Website ini memungkinkan untuk mengunggah gambar dan menerapkan berbagai transformasi Geometrik. Dibuat oleh Andreas, Firdaus, Rizki")
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
             st.session_state.page = "Transformasi Gambar"
@@ -60,7 +60,7 @@ def main():
     elif st.session_state.page == "Transformasi Gambar":
         # Tambahkan tombol kembali ke halaman utama
         if st.button("Kembali ke Halaman Utama"):
-            st.session_state.page = "Landing Page"
+            st.session_state.page = "Home Page"
             st.rerun()
 
         st.title("Transformasi Gambar")
