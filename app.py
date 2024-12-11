@@ -148,9 +148,10 @@ def main():
 
                 # Tombol untuk mengunduh gambar
                 st.download_button(
-                    label="Unduh Gambar yang Ditrasformasikan",
+                    label="Unduh Hasil",
                     data=img_bytes,
                     file_name="gambar_transformed.png",
                     mime="image/png")
+                
 if __name__ == "__main__":
     main()
