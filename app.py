@@ -67,9 +67,9 @@ def main():
         col1, col2, col3 = st.columns([1, 1, 1])
 
         with col1:
-            st.image("foto rizki.jpg", caption="Ahmad Rizki Safei", width=120)
+            st.image("foto rizki.jpg", caption="Ahmad Rizki Safei", width=150)
         with col2:
-            st.image("foto andre.jpg", caption="Andreas Prihananto", width=120)
+            st.image("foto andre.jpg", caption="Andreas Prihananto", width=150)
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
             st.session_state.page = "Transformasi Gambar"
