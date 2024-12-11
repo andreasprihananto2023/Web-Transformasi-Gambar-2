@@ -45,7 +45,7 @@ def main():
 
     if page == "Landing Page":
         st.title("Selamat Datang di Website Transformasi Gambar Group 7")
-        st.write("Weebsite ini memungkinkan Anda untuk mengunggah gambar dan menerapkan berbagai transformasi. Dibuat oleh Andreas, Firdaus, dan Rizki")
+        st.write("Website ini memungkinkan Anda untuk mengunggah gambar dan menerapkan berbagai transformasi. Dibuat oleh Andreas, Firdaus, dan Rizki")
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
             st.session_state.page = "Transformasi Gambar"
