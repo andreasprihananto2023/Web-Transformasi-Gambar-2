@@ -89,7 +89,7 @@ def main():
             st.rerun()
 
         st.title("Transformasi Gambar")
-        uploaded_file = st.file_uploader("Unggah Gambar", type=["jpg", "jpeg", "png"])
+        uploaded_file = st.file_uploader("Unggah Gambar yang akan ditransformasilan", type=["jpg", "jpeg", "png"])
         if uploaded_file is not None:
             # Decode gambar
             gambar_asli = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
@@ -164,7 +164,7 @@ def main():
                 st.download_button(
                     label="Unduh Hasil",
                     data=img_bytes,
-                    file_name="gambar_transformed.png",
+                    file_name="hasil_gambar.png",
                     mime="image/png")
                 
 if __name__ == "__main__":
