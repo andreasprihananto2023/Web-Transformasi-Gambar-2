@@ -147,13 +147,16 @@ def main():
                 # Slider untuk distorsi
                 skew_x = st.slider("Distorsi X", min_value=-0.5, max_value=0.5, value=0.0, step=0.1)
                 skew_y = st.slider("Distorsi Y", min_value=-0.5, max_value=0.5, value=0.0, step=0.1)
+                
+                # Transformasi real-time
+                gambar_transformed = transform_image(gambar_asli, transform_type, skew_x=skew_x, skew_y=skew_y)  
+                
                 with col2:
                     st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), 
                             caption=f"Distorsi (x={skew_x}, y={skew_y})", 
                             use_container_width=True)
 
-                # Transformasi real-time
-                gambar_transformed = transform_image(gambar_asli, transform_type, skew_x=skew_x, skew_y=skew_y)
+
                              
             elif transform_type == "saturasi":
                 # Slider untuk saturasi
