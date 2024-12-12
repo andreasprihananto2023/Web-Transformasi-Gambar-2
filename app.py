@@ -73,6 +73,8 @@ def main():
             st.image("foto rizki.jpg", caption="Ahmad Rizki Safei", width=150)
         with col2:
             st.image("foto andre.jpg", caption="Andreas Prihananto", width=150)
+        with col3:
+            st.image("foto firdaus.jpg", caption="Firdaus Bachtiar", width=150)
 
         st.write("")
         st.write("Klik tombol di bawah untuk mulai.")
