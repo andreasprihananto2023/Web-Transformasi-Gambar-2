@@ -150,30 +150,27 @@ def main():
                 with col2:
                     st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), 
                             caption=f"Distorsi (x={skew_x}, y={skew_y})", 
-                            use_container_width=True
-            
+                            use_container_width=True)
+
+                # Transformasi real-time
+                gambar_transformed = transform_image(gambar_asli, transform_type, skew_x=skew_x, skew_y=skew_y)
+                             
             elif transform_type == "saturasi":
                 # Slider untuk saturasi
                 saturasi = st.slider("Saturasi", min_value=0.0, max_value=2.0, value=1.0, step=0.1)
-    
                 # Konversi gambar ke HSV
                 hsv = cv2.cvtColor(gambar_asli, cv2.COLOR_BGR2HSV)
-    
                 # Atur saturasi
                 hsv[..., 1] = np.clip(hsv[..., 1] * saturasi, 0, 255)
-    
                 # Konversi kembali ke BGR
                 gambar_transformed = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
-    
                 with col2:
                     st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), 
                      caption=f"Saturasi (saturasi={saturasi})", 
                      use_container_width=True)
                 
-                # Transformasi real-time
-                gambar_transformed = transform_image(gambar_asli, transform_type, skew_x=skew_x, skew_y=skew_y)
                 
-                )
+        
             if gambar_transformed is not None:
                 # Simpan gambar yang ditransformasikan ke dalam buffer
                 _, buffer = cv2.imencode('.png', gambar_transformed)
