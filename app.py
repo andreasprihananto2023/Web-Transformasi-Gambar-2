@@ -102,7 +102,7 @@ def main():
                 st.image(cv2.cvtColor(gambar_asli, cv2.COLOR_BGR2RGB), caption="Gambar Asli", use_container_width=True)
 
             # Pilih jenis transformasi dengan dropdown
-            transform_type = st.selectbox("Pilih Jenis Transformasi", ["translasi", "rotasi", "skala", "distorsi"])
+            transform_type = st.selectbox("Pilih Jenis Transformasi", ["translasi", "rotasi", "skala", "distorsi", "saturasi"])
 
             # Real-time transformasi dengan slider
             if transform_type == "translasi":
