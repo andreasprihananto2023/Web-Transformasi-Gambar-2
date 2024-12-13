@@ -42,7 +42,8 @@ def transform_image(image, transform_type, **kwargs):
 
 def main():
     # Navigation bar di atas
-    
+    if 'page' not in st.session_state:
+        st.session_state.page = "Home Page"
     # Membuat layout untuk navigation bar
     nav_bar = st.container()
     col1, col2 = nav_bar.columns([1, 3])  # Kolom untuk logo dan tombol
