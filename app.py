@@ -41,6 +41,10 @@ def transform_image(image, transform_type, **kwargs):
         matriks_distorsi = cv2.getPerspectiveTransform(pts1, pts2)
         return cv2.warpPerspective(image, matriks_distorsi, (w, h))
 
+    elif transform_type == 'ekstraksi tepi':
+        # Ekstraksi tepi menggunakan Canny
+        return cv2.Canny(image, 100, 200)  # Anda bisa menyesuaikan threshold sesuai kebutuhan
+
 def main():
     st.sidebar.title("Group 7")
     if 'page' not in st.session_state:
@@ -158,8 +162,6 @@ def main():
                             caption=f"Distorsi (x={skew_x}, y={skew_y})", 
                             use_container_width=True)
 
-
-                             
             elif transform_type == "saturasi":
                 # Slider untuk saturasi
                 saturasi = st.slider("Saturasi", min_value=0.0, max_value=2.0, value=1.0, step=0.1)
@@ -173,8 +175,12 @@ def main():
                     st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), 
                      caption=f"Saturasi (saturasi={saturasi})", 
                      use_container_width=True)
-                
-                
+
+            elif transform_type == "ekstraksi tepi":
+                # Ekstraksi tepi
+                gambar_transformed = transform_image(gambar_asli, transform_type)
+                with col2:
+                    st.image(gambar_transformed, caption="Ekstraksi Tepi", use_container_width=True)
         
             if gambar_transformed is not None:
                 # Simpan gambar yang ditransformasikan ke dalam buffer
