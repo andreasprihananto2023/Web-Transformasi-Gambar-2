@@ -2,7 +2,6 @@ import streamlit as st
 import cv2
 import numpy as np
 
-
 # Kompres gambar
 @st.cache_data
 def compress_image(image, max_size=(800, 800)):
@@ -44,6 +43,7 @@ def main():
     # Navigation bar di atas
     if 'page' not in st.session_state:
         st.session_state.page = "Home Page"
+    
     # Membuat layout untuk navigation bar
     nav_bar = st.container()
     col1, col2 = nav_bar.columns([1, 3])  # Kolom untuk logo dan tombol
@@ -64,6 +64,8 @@ def main():
                 st.session_state.page = "Transformasi Gambar"
                 st.experimental_rerun()
 
+    # Debugging: Tampilkan nilai dari st.session_state.page
+    st.write("Current Page:", st.session_state.page)
     if st.session_state.page == "Home Page":
         # Membuat dua kolom
         col1, col2 = st.columns([0.6, 2])  # Kolom 1 lebih kecil dari kolom 2
@@ -82,23 +84,23 @@ def main():
         col1, col2, col3 = st.columns([1, 1, 1])
 
         with col1:
-            st.image("foto rizki.jpg", caption="Ahmad Rizki Safei", use_container_width=True)
+            st.image("foto_rizki.jpg", caption="Ahmad Rizki Safei", use_container_width=True)
         with col2:
-            st.image("foto andre.jpg", caption="Andreas Prihananto", use_container_width=True)
+            st.image("foto_andre.jpg", caption="Andreas Prihananto", use_container_width=True)
         with col3:
-            st.image("foto firdaus.jpg", caption="Firdaus Bachtiar", use_container_width=True)
+            st.image("foto_firdaus.jpg", caption="Firdaus Bachtiar", use_container_width=True)
 
         st.write("")
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
             st.session_state.page = "Transformasi Gambar"
-            st.rerun()
+            st.experimental_rerun()
 
     elif st.session_state.page == "Transformasi Gambar":
         # Tambahkan tombol kembali ke halaman utama
         if st.button("Kembali ke Halaman Utama"):
             st.session_state.page = "Home Page"
-            st.rerun()
+            st.experimental_rerun()
 
         st.title("Transformasi Gambar")
         uploaded_file = st.file_uploader("Unggah Gambar yang akan ditransformasilan", type=["jpg", "jpeg", "png"])
@@ -144,8 +146,8 @@ def main():
 
             elif transform_type == "skala":
                 # Slider untuk skala
-                skala_x = st.slider("Skala X", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
-                skala_y = st.slider("Skala Y", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
+                skala_x = st.slider("Skala X", min_value=0.1, max_value=2.0, value=1.
+                                                    skala_y = st.slider("Skala Y", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
                 
                 # Transformasi real-time
                 gambar_transformed = transform_image(gambar_asli, transform_type, skala_x=skala_x, skala_y=skala_y)
@@ -168,8 +170,6 @@ def main():
                             caption=f"Distorsi (x={skew_x}, y={skew_y})", 
                             use_container_width=True)
 
-
-                             
             elif transform_type == "saturasi":
                 # Slider untuk saturasi
                 saturasi = st.slider("Saturasi", min_value=0.0, max_value=2.0, value=1.0, step=0.1)
@@ -183,10 +183,8 @@ def main():
                     st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), 
                      caption=f"Saturasi (saturasi={saturasi})", 
                      use_container_width=True)
-                
-                
-        
-            if gambar_transformed is not None:
+
+            if 'gambar_transformed' in locals():
                 # Simpan gambar yang ditransformasikan ke dalam buffer
                 _, buffer = cv2.imencode('.png', gambar_transformed)
                 img_bytes = buffer.tobytes()
@@ -197,6 +195,6 @@ def main():
                     data=img_bytes,
                     file_name="hasil_gambar.png",
                     mime="image/png")
-                
+
 if __name__ == "__main__":
     main()
