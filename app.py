@@ -285,5 +285,16 @@ def main():
                 file_name="hasil_ekstraksi_gambar.png",
                 mime="image/png")
 
+        # Simpan gambar dominan ke dalam buffer
+        _, buffer_dominan = cv2.imencode('.png', gambar_dominan)
+        img_bytes_dominan = buffer_dominan.tobytes()
+
+        # Tombol untuk mengunduh gambar dominan
+        st.download_button(
+            label="Unduh Sebaran Warna Dominan",
+            data=img_bytes_dominan,
+            file_name="Warna_dominan.png",
+            mime="image/png"
+
 if __name__ == "__main__":
     main()
