@@ -54,12 +54,14 @@ def main():
 
     if st.session_state.page == "Home Page":
         # Membuat dua kolom
-        col1, col2 = st.columns([0.6, 2])  # Kolom 1 lebih kecil dari kolom 2
+        col1, col2, col3 = st.columns([0.6, 0.1, 2])  # Kolom 1 lebih kecil dari kolom 2
 
         with col1:
             # Menampilkan gambar di kolom pertama
             st.image("logo_pu.png", caption="President University", width=120)
         with col2:
+            st.write("")
+        with col3:
             # Menampilkan teks di kolom kedua
             st.markdown("<h1 style='font-size: 40px;'>PRESIDENT UNIVERSITY</h1>", unsafe_allow_html=True)
             st.markdown("<h2 style='font-size: 30px;'>Teknik Industri - Fakultas Teknik</h2>", unsafe_allow_html=True)
