@@ -253,7 +253,7 @@ def main():
                 gambar_dominan = remove_non_dominant_colors(gambar_asli, dominant_color)
             # Tampilkan gambar dengan warna dominan saja
                 if gambar_dominan is not None and gambar_dominan.size > 0:
-                    st.image(cv2.cvtColor(gambar_dominan, cv2.COLOR_BGR2RGB), caption="Warna Dominan", use_container_width=True)
+                    st.image(cv2.cvtColor(gambar_dominan, cv2.COLOR_BGR2RGB), caption="Sebaran Warna Dominan", use_container_width=True)
                 else:
                     st.error("Gambar dengan warna dominan tidak dapat ditampilkan.")
             
