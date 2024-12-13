@@ -80,9 +80,16 @@ def main():
 
         st.write("")
         st.write("Klik tombol di bawah untuk mulai.")
-        if st.button("Mulai Transformasi"):
-            st.session_state.page = "Transformasi Geometrik"
-            st.rerun()
+
+        col1, col2 = st.columns([1, 1])
+        with col1:
+            if st.button("Transformasi Geometrik"):
+                st.session_state.page = "Transformasi Geometrik"
+                st.rerun()
+        with col2:
+            if st.button("Ekstrasi Tepi"):
+                st.session_stage.page = "Ekstrasi Tepi"
+                st.rerun()
 
     elif st.session_state.page == "Transformasi Geometrik":
         # Tambahkan tombol kembali ke halaman utama
