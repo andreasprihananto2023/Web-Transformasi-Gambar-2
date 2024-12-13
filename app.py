@@ -42,7 +42,7 @@ def transform_image(image, transform_type, **kwargs):
         return cv2.warpPerspective(image, matriks_distorsi, (w, h))
 
 def main():
-    st.sidebar.title("Navigasi")
+    st.sidebar.title("Group 7")
     if 'page' not in st.session_state:
         st.session_state.page = "Home Page"
 
