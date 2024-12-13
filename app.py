@@ -134,7 +134,7 @@ def main():
                 st.session_state.page = "Transformasi Geometrik"
                 st.rerun()
         with col2:
-            if st.button("Ekstrasi Gambar"):
+            if st.button("Ekstraksi Gambar"):
                 st.session_state.page = "Ekstraksi Gambar"
                 st.rerun()
 
@@ -144,6 +144,7 @@ def main():
             st.session_state.page = "Home Page"
             st.rerun()
         st.title("Transformasi Gambar")
+        st.write("Di bagian ini, anda dapat melakukan berbagai transformasi gambar secara geometrik, seperti scalling, skewing, rotasi, translasi, Gaussian blur, dan Saturasi")
         uploaded_file = st.file_uploader("Unggah Gambar yang akan ditransformasilan", type=["jpg", "jpeg", "png"])
         if uploaded_file is not None:
             # Decode gambar
