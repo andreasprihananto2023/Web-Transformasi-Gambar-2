@@ -11,7 +11,6 @@ st.set_page_config(
     page_icon="logo_pu.png",
     initial_sidebar_state="collapsed")
 
-
 # Kompres gambar
 @st.cache_data
 def compress_image(image, max_size=(800, 800)):
@@ -26,15 +25,12 @@ def transform_image(image, dx=0, dy=0, sudut=0, skala_x=1.0, skala_y=1.0, skew_x
     # Translasi
     matriks_translasi = np.float32([[1, 0, dx], [0, 1, dy]])
     image = cv2.warpAffine(image, matriks_translasi, (image.shape[1], image.shape[0]))
-
     # Rotasi
     tengah = (image.shape[1] // 2, image.shape[0] // 2)
     matriks_rotasi = cv2.getRotationMatrix2D(tengah, sudut, 1.0)
     image = cv2.warpAffine(image, matriks_rotasi, (image.shape[1], image.shape[0]))
-
     # Skala
     image = cv2.resize(image, None, fx=skala_x, fy=skala_y, interpolation=cv2.INTER_LINEAR)
-
     # Distorsi
     h, w = image.shape[:2]
     pts1 = np.float32([[0, 0], [w-1, 0], [0, h-1], [w-1, h-1]])
@@ -44,17 +40,14 @@ def transform_image(image, dx=0, dy=0, sudut=0, skala_x=1.0, skala_y=1.0, skew_x
                         [(1 + skew_y) * w - 1, h-1]])
     matriks_distorsi = cv2.getPerspectiveTransform(pts1, pts2)
     image = cv2.warpPerspective(image, matriks_distorsi, (w, h))
-
     # Gaussian Blur
     if blur_kernel > 1:
         image = cv2.GaussianBlur(image, (blur_kernel, blur_kernel), 0)
-
     # Saturasi
     if saturation != 1.0:
         hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         hsv_image[..., 1] = np.clip(hsv_image[..., 1] * saturation, 0, 255)  # Mengatur saturasi
         image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2BGR)
-
     return image
 
 def edge_detection(image, threshold1=100, threshold2=200):
@@ -78,30 +71,22 @@ def extract_metadata(image):
 def get_dominant_color(image, k=5):
     # Reshape the image to be a list of pixels
     pixels = image.reshape(-1, 3)
-    
     # Fit the KMeans model
     kmeans = KMeans(n_clusters=k)
     kmeans.fit(pixels)
-    
     # Get the most common color
     dominant_color = kmeans.cluster_centers_[kmeans.labels_].astype(int)
-    
     # Count the occurrences of each color
     unique_colors, counts = np.unique(dominant_color, axis=0, return_counts=True)
-    
     # Get the index of the most common color
     dominant_color_index = counts.argmax()
-    
     return unique_colors[dominant_color_index]
-
 def remove_non_dominant_colors(image, dominant_color, threshold=60):
     # Buat batas bawah dan atas untuk warna dominan
     lower_bound = np.array([max(0, c - threshold) for c in dominant_color])
     upper_bound = np.array([min(255, c + threshold) for c in dominant_color])
-    
     # Buat mask untuk warna yang dekat dengan warna dominan
     mask = cv2.inRange(image, lower_bound, upper_bound)
-    
     # Buat gambar output dengan warna non-dominan diatur ke putih
     output_image = np.full(image.shape, 255, dtype=np.uint8)  # Mulai dengan gambar putih
     output_image[mask > 0] = image[mask > 0]  # Set warna dominan
@@ -112,16 +97,12 @@ def main():
     st.sidebar.title("Group 7")
     if 'page' not in st.session_state:
         st.session_state.page = "Home Page"
-
     page = st.sidebar.radio("Pilih Halaman", ["Home Page", "Transformasi Geometrik", "Ekstraksi Gambar"], index=["Home Page", "Transformasi Geometrik", "Ekstraksi Gambar"].index(st.session_state.page))
-    
     # Update session state with the selected page
     st.session_state.page = page
-
     if st.session_state.page == "Home Page":
         # Membuat dua kolom
         col1, col2, col3 = st.columns([0.6, 0.1, 2])  # Kolom 1 lebih kecil dari kolom 2
-
         with col1:
             # Menampilkan gambar di kolom pertama
             st.image("logo_pu.png", caption="President University", width=120)
@@ -162,41 +143,31 @@ def main():
         if st.button("Kembali ke Halaman Utama"):
             st.session_state.page = "Home Page"
             st.rerun()
-
         st.title("Transformasi Gambar")
         uploaded_file = st.file_uploader("Unggah Gambar yang akan ditransformasilan", type=["jpg", "jpeg", "png"])
         if uploaded_file is not None:
             # Decode gambar
             gambar_asli = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
             gambar_asli = compress_image(gambar_asli)
-
             # Kolom untuk menampilkan gambar asli dan hasil transformasi
             col1, col2 = st.columns(2)
-            
             with col1:
                 st.image(cv2.cvtColor(gambar_asli, cv2.COLOR_BGR2RGB), caption="Gambar Asli", use_container_width=True)
-
             # Slider untuk translasi
             dx = st.slider("Translasi X (dx)", min_value=-200, max_value=200, value=0, step=10)
             dy = st.slider("Translasi Y (dy)", min_value=-200, max_value=200, value=0, step=10)
-
             # Slider untuk rotasi
             sudut = st.slider("Sudut Rotasi (derajat)", min_value=-180, max_value=180, value=0, step=10)
-
             # Slider untuk skala
             skala_x = st.slider("Skala X", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
             skala_y = st.slider("Skala Y", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
-
             # Slider untuk Skewing
             skew_x = st.slider("Skewing X", min_value=-0.5, max_value=0.5, value=0.0, step=0.1)
             skew_y = st.slider("Skewing Y", min_value=-0.5, max_value=0.5, value=0.0, step=0.1)
-
             # Slider untuk Gaussian Blur
             blur_kernel = st.slider("Gaussian Blur", min_value=1, max_value=21, value=1, step=2)
-
             # Slider untuk saturasi
             saturation = st.slider("Saturasi", min_value=0.0, max_value=3.0, value=1.0, step=0.1)
-
             # Terapkan semua transformasi
             gambar_transformed = transform_image(gambar_asli, dx=dx, dy=dy, sudut=sudut, skala_x=skala_x, skala_y=skala_y, skew_x=skew_x, skew_y=skew_y, blur_kernel=blur_kernel, saturation=saturation)
 
