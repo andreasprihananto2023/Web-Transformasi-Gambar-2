@@ -70,43 +70,6 @@ def extract_metadata(image):
         metadata['EXIF Data'] = 'No EXIF attribute found'
     return metadata
 
-def load_yolo_model():
-    net = cv2.dnn.readNet("yolov3.weights", "yolov3.cfg")
-    layer_names = net.getLayerNames()
-    output_layers = [layer_names[i[0] - 1] for i in net.getUnconnectedOutLayers()]
-    return net, output_layers
-
-def detect_objects(image, net, output_layers):
-    height, width = image.shape[:2]
-    blob = cv2.dnn.blobFromImage(image, 0.00392, (416, 416), (0, 0, 0), True, crop=False)
-    net.setInput(blob)
-    outputs = net.forward(output_layers)
-
-    boxes = []
-    confidences = []
-    class_ids = []
-
-    for output in outputs:
-        for detection in output:
-            scores = detection[5:]
-            class_id = np.argmax(scores)
-            confidence = scores[class_id]
-            if confidence > 0.5:  # Threshold confidence
-                center_x = int(detection[0] * width)
-                center_y = int(detection[1] * height)
-                w = int(detection[2] * width)
-                h = int(detection[3] * height)
-
-                # Rectangle coordinates
-                x = int(center_x - w / 2)
-                y = int(center_y - h / 2)
-
-                boxes.append([x, y, w, h])
-                confidences.append(float(confidence))
-                class_ids.append(class_id)
-
-    indexes = cv2.dnn.NMSBoxes(boxes, confidences, 0.5, 0.4)
-    return boxes, confidences, class_ids, indexes
 
 def main():
     st.sidebar.title("Group 7")
@@ -255,29 +218,6 @@ def main():
             for key, value in metadata.items():
                 st.write(f"{key}: {value}")
 
-        # Load YOLO model
-        net, output_layers = load_yolo_model()
-
-        # Deteksi objek
-        boxes, confidences, class_ids, indexes = detect_objects(gambar_asli, net, output_layers)
-
-        # Load class names
-        with open("coco.names", "r") as f:
-            classes = [line.strip() for line in f.readlines()]
-
-        # Gambar hasil deteksi objek
-        for i in range(len(boxes)):
-            if i in indexes:
-                x, y, w, h = boxes[i]
-                label = str(classes[class_ids[i]])
-                confidence = confidences[i]
-                color = (0, 255, 0)  # Warna kotak hijau
-                cv2.rectangle(gambar_asli, (x, y), (x + w, y + h), color, 2)
-                cv2.putText(gambar_asli, f"{label} {confidence:.2f}", (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
-
-        # Tampilkan gambar dengan deteksi objek
-        st.subheader("Hasil Deteksi Objek")
-        st.image(cv2.cvtColor(gambar_asli, cv2.COLOR_BGR2RGB), caption="Gambar dengan Deteksi Objek", use_container_width=True)
             
         if gambar_ekstraksi_gambar is not None:
             # Simpan gambar hasil ekstraksi tepi ke dalam buffer
