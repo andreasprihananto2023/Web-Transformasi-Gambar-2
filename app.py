@@ -64,7 +64,7 @@ def main():
         with col3:
             # Menampilkan teks di kolom kedua
             st.markdown("<h1 style='font-size: 40px;'>PRESIDENT UNIVERSITY</h1>", unsafe_allow_html=True)
-            st.markdown("<h2 style='font-size: 30px;'>Teknik Industri - Fakultas Teknik</h2>", unsafe_allow_html=True)
+            st.markdown("<h2 style='font-size: 28px;'>Aljabar Linear - Teknik Industri</h2>", unsafe_allow_html=True)
         
         st.title("Selamat Datang di Website Transformasi Gambar Group 7")    
         st.write("Website ini memungkinkan untuk mengunggah gambar dan menerapkan berbagai transformasi Geometrik. Dibuat oleh Andreas, Firdaus, Rizki")
