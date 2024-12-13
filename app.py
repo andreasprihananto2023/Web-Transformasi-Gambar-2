@@ -43,10 +43,23 @@ def transform_image(image, transform_type, **kwargs):
 def main():
     # Navigation bar di atas
     st.title("Transformasi Gambar")
-    page = st.selectbox("Pilih Halaman", ["Home Page", "Transformasi Gambar"])
     
-    # Update session state with the selected page
-    st.session_state.page = page
+    # Tombol untuk navigasi
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        if st.button("Home Page"):
+            st.session_state.page = "Home Page"
+            st.experimental_rerun()
+    
+    with col2:
+        if st.button("Transformasi Gambar"):
+            st.session_state.page = "Transformasi Gambar"
+            st.experimental_rerun()
+
+    # Cek halaman yang dipilih
+    if 'page' not in st.session_state:
+        st.session_state.page = "Home Page"
 
     if st.session_state.page == "Home Page":
         # Membuat dua kolom
