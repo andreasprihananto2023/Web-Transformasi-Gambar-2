@@ -60,7 +60,7 @@ def main():
 
         with col1:
             # Menampilkan gambar di kolom pertama
-            st.image(logo_url, caption="President University", width=120)
+            st.image("logo_pu.png", caption="President University", width=120)
         with col2:
             st.write("")
         with col3:
