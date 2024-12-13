@@ -183,12 +183,12 @@ def main():
             skala_x = st.slider("Skala X", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
             skala_y = st.slider("Skala Y", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
 
-            # Slider untuk distorsi
-            skew_x = st.slider("Distorsi X", min_value=-0.5, max_value=0.5, value=0.0, step=0.1)
-            skew_y = st.slider("Distorsi Y", min_value=-0.5, max_value=0.5, value=0.0, step=0.1)
+            # Slider untuk Skewing
+            skew_x = st.slider("Skewing X", min_value=-0.5, max_value=0.5, value=0.0, step=0.1)
+            skew_y = st.slider("Skewing Y", min_value=-0.5, max_value=0.5, value=0.0, step=0.1)
 
             # Slider untuk Gaussian Blur
-            blur_kernel = st.slider("Ukuran Kernel Gaussian Blur (harus ganjil)", min_value=1, max_value=21, value=1, step=2)
+            blur_kernel = st.slider("Gaussian Blur", min_value=1, max_value=21, value=1, step=2)
 
             # Slider untuk saturasi
             saturation = st.slider("Saturasi", min_value=0.0, max_value=3.0, value=1.0, step=0.1)
