@@ -146,7 +146,7 @@ def main():
 
             elif transform_type == "skala":
                 # Slider untuk skala
-                skala_x = st.slider("Skala X", min_value=0.1, max_value=2.0, value=1.
+                skala_x = st.slider("Skala X", min_value=0.1, max_value=2.0, value=1.)
                                                     skala_y = st.slider("Skala Y", min_value=0.1, max_value=2.0, value=1.0, step=0.1)
                 
                 # Transformasi real-time
