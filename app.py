@@ -2,7 +2,6 @@ import streamlit as st
 import cv2
 import numpy as np
 
-st.set_page_config(initial_sidebar_state="collapsed")
 
 # Kompres gambar
 @st.cache_data
