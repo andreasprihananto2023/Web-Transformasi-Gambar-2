@@ -183,21 +183,21 @@ def main():
             threshold2 = st.slider("Threshold 2", min_value=0, max_value=255, value=200, step=1)
 
             # Ekstraksi tepi
-            gambar_ekstraksi_tepi = edge_detection(gambar_asli, threshold1=threshold1, threshold2=threshold2)
+            gambar_ekstraksi_gambar = edge_detection(gambar_asli, threshold1=threshold1, threshold2=threshold2)
 
             with col2:
-                st.image(gambar_ekstraksi_tepi, caption="Hasil Ekstraksi Tepi", use_container_width=True)
+                st.image(gambar_ekstraksi_gambar, caption="Hasil Ekstraksi Gambar", use_container_width=True)
 
             if gambar_ekstraksi_tepi is not None:
                 # Simpan gambar hasil ekstraksi tepi ke dalam buffer
-                _, buffer = cv2.imencode('.png', gambar_ekstraksi_tepi)
+                _, buffer = cv2.imencode('.png', gambar_ekstraksi_gambar)
                 img_bytes = buffer.tobytes()
 
                 # Tombol untuk mengunduh gambar hasil ekstraksi tepi
                 st.download_button(
-                    label="Unduh Hasil Ekstraksi Tepi",
+                    label="Unduh Hasil Ekstraksi Gambar",
                     data=img_bytes,
-                    file_name="hasil_ekstraksi_tepi.png",
+                    file_name="hasil_ekstraksi_gambar.png",
                     mime="image/png")
 
 if __name__ == "__main__":
