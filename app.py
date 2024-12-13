@@ -212,6 +212,7 @@ def main():
 
             # Tampilkan metadata
             st.subheader("Metadata Gambar")
+            st.write("Khusus gambar asli, tanpa edit sebelumnya")
             for key, value in metadata.items():
                 st.write(f"{key}: {value}")
 
