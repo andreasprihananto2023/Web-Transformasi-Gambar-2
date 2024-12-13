@@ -188,7 +188,7 @@ def main():
             with col2:
                 st.image(gambar_ekstraksi_gambar, caption="Hasil Ekstraksi Gambar", use_container_width=True)
 
-            if gambar_ekstraksi_tepi is not None:
+            if gambar_ekstraksi_gambar is not None:
                 # Simpan gambar hasil ekstraksi tepi ke dalam buffer
                 _, buffer = cv2.imencode('.png', gambar_ekstraksi_gambar)
                 img_bytes = buffer.tobytes()
