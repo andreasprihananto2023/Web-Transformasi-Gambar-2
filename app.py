@@ -57,7 +57,7 @@ def main():
     if 'page' not in st.session_state:
         st.session_state.page = "Home Page"
 
-    page = st.sidebar.radio("Pilih Halaman", ["Home Page", "Transformasi Geometrik", "Ekstraksi Tepi"], index=["Home Page", "Transformasi Geometrik", "Ekstraksi Tepi"].index(st.session_state.page))
+    page = st.sidebar.radio("Pilih Halaman", ["Home Page", "Transformasi Geometrik", "Ekstraksi Gambar"], index=["Home Page", "Transformasi Geometrik", "Ekstraksi Gambar"].index(st.session_state.page))
     
     # Update session state with the selected page
     st.session_state.page = page
@@ -98,7 +98,7 @@ def main():
                 st.rerun()
         with col2:
             if st.button("Ekstrasi Tepi"):
-                st.session_state.page = "Ekstraksi Tepi"
+                st.session_state.page = "Ekstraksi Gambar"
                 st.rerun()
 
     elif st.session_state.page == "Transformasi Geometrik":
@@ -159,14 +159,14 @@ def main():
                     file_name="hasil_gambar.png",
                     mime="image/png")
 
-    elif st.session_state.page == "Ekstraksi Tepi":
+    elif st.session_state.page == "Ekstraksi Gambar":
         # Tambahkan tombol kembali ke halaman utama
         if st.button("Kembali ke Halaman Utama"):
             st.session_state.page = "Home Page"
             st.rerun()
 
-        st.title("Ekstraksi Tepi")
-        uploaded_file = st.file_uploader("Unggah Gambar untuk Ekstraksi Tepi", type=["jpg", "jpeg", "png"])
+        st.title("Ekstraksi Gambar")
+        uploaded_file = st.file_uploader("Unggah Gambar untuk Ekstraksi Gambar", type=["jpg", "jpeg", "png"])
         if uploaded_file is not None:
             # Decode gambar
             gambar_asli = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
