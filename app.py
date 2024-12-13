@@ -64,8 +64,6 @@ def main():
                 st.session_state.page = "Transformasi Gambar"
                 st.experimental_rerun()
 
-    # Debugging: Tampilkan nilai dari st.session_state.page
-    st.write("Current Page:", st.session_state.page)
     if st.session_state.page == "Home Page":
         # Membuat dua kolom
         col1, col2 = st.columns([0.6, 2])  # Kolom 1 lebih kecil dari kolom 2
