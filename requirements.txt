@@ -2,3 +2,6 @@ streamlit
 opencv-python-headless
 numpy
 Pillow
+scikit-learn
+pandas
+matplotlib
