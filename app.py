@@ -98,7 +98,24 @@ def remove_non_dominant_colors(image, dominant_color, threshold=60):
     mask = cv2.inRange(image, lower_bound, upper_bound)
     
     # Buat gambar output dengan warna non-dominan diatur ke putih
-    output_image = np.full(image.shape, 255, dtype=np.uint8)
+    output_image = np.full(image.shape, 255, dtype=np.uint8)  # Mulai dengan gambar putih
+    output_image[mask > 0] = image[mask > 0]  # Set warna dominan
+
+    return output_image
+
+# Di dalam bagian "Ekstraksi Gambar"
+elif st.session_state.page == "Ekstraksi Gambar":
+    # ... kode sebelumnya ...
+
+    # Hapus warna non-dominan
+    gambar_dominan = remove_non_dominant_colors(gambar_asli, dominant_color)
+
+    # Debugging: Periksa bentuk gambar dominan
+    if gambar_dominan is not None and gambar_dominan.size > 0:
+        st.subheader("Gambar dengan Warna Dominan Saja")
+        st.image(cv2.cvtColor(gambar_dominan, cv2.COLOR_BGR2RGB), caption="Gambar dengan Warna Dominan", use_container_width=True)
+    else:
+        st.error("Gambar dengan warna dominan tidak dapat ditampilkan.")
 
 def main():
     st.sidebar.title("Group 7")
