@@ -3,6 +3,8 @@ import cv2
 import numpy as np
 from PIL import Image
 import io
+from PIL.ExifTags import TAGS
+
 
 st.set_page_config(initial_sidebar_state="collapsed")
 
@@ -62,6 +64,10 @@ def extract_metadata(image):
             for tag_id, value in exif_data.items():
                 tag = TAGS.get(tag_id, tag_id)
                 metadata[tag] = value
+        else:
+            metadata['EXIF Data'] = 'No EXIF data found'
+    else:
+        metadata['EXIF Data'] = 'No EXIF attribute found'
     return metadata
 
 def main():
