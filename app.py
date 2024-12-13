@@ -44,22 +44,20 @@ def main():
     # Navigation bar di atas
     st.title("Transformasi Gambar")
     
-    # Tombol untuk navigasi
-    col1, col2 = st.columns(2)
-    
+    # Membuat layout untuk navigation bar
+    nav_bar = st.container()
+    col1, col2 = nav_bar.columns([1, 3])  # Kolom untuk logo dan tombol
+
     with col1:
+        st.image("logo_group7.png", caption="Logo Group 7", width=120)  # Ganti dengan path logo Anda
+
+    with col2:
         if st.button("Home Page"):
             st.session_state.page = "Home Page"
             st.experimental_rerun()
-    
-    with col2:
         if st.button("Transformasi Gambar"):
             st.session_state.page = "Transformasi Gambar"
             st.experimental_rerun()
-
-    # Cek halaman yang dipilih
-    if 'page' not in st.session_state:
-        st.session_state.page = "Home Page"
 
     if st.session_state.page == "Home Page":
         # Membuat dua kolom
