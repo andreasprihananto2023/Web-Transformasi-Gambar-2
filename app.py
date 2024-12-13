@@ -97,7 +97,7 @@ def main():
                 st.session_state.page = "Transformasi Geometrik"
                 st.rerun()
         with col2:
-            if st.button("Ekstrasi Tepi"):
+            if st.button("Ekstrasi Gambar"):
                 st.session_state.page = "Ekstraksi Gambar"
                 st.rerun()
 
