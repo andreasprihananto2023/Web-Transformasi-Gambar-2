@@ -70,7 +70,7 @@ def main():
 
         with col1:
             # Menampilkan gambar di kolom pertama
-            st.image("logo_pu.png", caption="President University", width=120)
+            st.image("logo_pu.png", caption="President University", use_container_width=True)
         with col2:
             # Menampilkan teks di kolom kedua
             st.markdown("<h1 style='font-size: 40px;'>PRESIDENT UNIVERSITY</h1>", unsafe_allow_html=True)
@@ -82,11 +82,11 @@ def main():
         col1, col2, col3 = st.columns([1, 1, 1])
 
         with col1:
-            st.image("foto rizki.jpg", caption="Ahmad Rizki Safei", width=160)
+            st.image("foto rizki.jpg", caption="Ahmad Rizki Safei", use_container_width=True)
         with col2:
-            st.image("foto andre.jpg", caption="Andreas Prihananto", width=160)
+            st.image("foto andre.jpg", caption="Andreas Prihananto", use_container_width=True)
         with col3:
-            st.image("foto firdaus.jpg", caption="Firdaus Bachtiar", width=160)
+            st.image("foto firdaus.jpg", caption="Firdaus Bachtiar", use_container_width=True)
 
         st.write("")
         st.write("Klik tombol di bawah untuk mulai.")
