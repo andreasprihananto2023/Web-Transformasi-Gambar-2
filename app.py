@@ -250,7 +250,7 @@ def main():
 
             with col3:
             # Hapus warna non-dominan
-            gambar_dominan = remove_non_dominant_colors(gambar_asli, dominant_color)
+                gambar_dominan = remove_non_dominant_colors(gambar_asli, dominant_color)
 
             # Tampilkan gambar dengan warna dominan saja
             if gambar_dominan is not None and gambar_dominan.size > 0:
