@@ -141,7 +141,7 @@ def main():
             saturation = st.slider("Saturasi", min_value=0.0, max_value=3.0, value=1.0, step=0.1)
             
             # Terapkan semua transformasi
-            gambar_transformed = transform_image(gambar_asli, dx=dx, dy=dy, sudut=sudut, skala_x=skala_x, skala_y=skala_y, skew_x=skew_x, skew_y=skew_y)
+            gambar_transformed = transform_image(gambar_asli, dx=dx, dy=dy, sudut=sudut, skala_x=skala_x, skala_y=skala_y, skew_x=skew_x, skew_y=skew_y, blur_kernel=blur_kernel, saturation=saturation)
 
             with col2:
                 st.image(cv2.cvtColor(gambar_transformed, cv2.COLOR_BGR2RGB), caption="Gambar Ditransformasi", use_container_width=True)
