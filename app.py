@@ -143,7 +143,7 @@ def main():
         st.write("")
         st.write("Klik tombol di bawah untuk mulai.")
 
-        col1, col2 = st.columns([1, 1])
+        col1, col2 = st.columns([0.8, 1])
         with col1:
             if st.button("Transformasi Geometrik"):
                 st.session_state.page = "Transformasi Geometrik"
