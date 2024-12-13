@@ -65,9 +65,10 @@ def extract_metadata(image):
                 tag = TAGS.get(tag_id, tag_id)
                 metadata[tag] = value
         else:
-            metadata['EXIF Data'] = 'No EXIF data found'
+            # Ganti pesan ini
+            metadata['Info'] = 'Gambar pernah diedit sebelumnya, tidak ada metadata yang dapat ditampilkan'
     else:
-        metadata['EXIF Data'] = 'No EXIF attribute found'
+        metadata['Info'] = 'Gambar pernah diedit sebelumnya, tidak ada metadata yang dapat ditampilkan'
     return metadata
 
 def get_dominant_color(image, k=5):
