@@ -232,7 +232,7 @@ def main():
             dominant_color = get_dominant_color(gambar_asli)
 
             # Kolom untuk menampilkan gambar asli dan hasil ekstraksi tepi
-            col1, col2 = st.columns(2)
+            col1, col2, col3 = st.columns(3)
 
             with col1:
                 st.image(cv2.cvtColor(gambar_asli, cv2.COLOR_BGR2RGB), caption="Gambar Asli", use_container_width=True)
@@ -248,6 +248,17 @@ def main():
             with col2:
                 st.image(gambar_ekstraksi_gambar, caption="Hasil Ekstraksi Gambar", use_container_width=True)
 
+        with col3:
+            # Hapus warna non-dominan
+            gambar_dominan = remove_non_dominant_colors(gambar_asli, dominant_color)
+
+            # Tampilkan gambar dengan warna dominan saja
+            if gambar_dominan is not None and gambar_dominan.size > 0:
+                st.subheader("Gambar dengan Warna Dominan Saja")
+                st.image(cv2.cvtColor(gambar_dominan, cv2.COLOR_BGR2RGB), caption="Gambar dengan Warna Dominan", use_container_width=True)
+            else:
+                st.error("Gambar dengan warna dominan tidak dapat ditampilkan.")
+            
             # Tampilkan metadata
             st.subheader("Metadata Gambar")
             st.write("Khusus gambar asli, tanpa edit sebelumnya")
