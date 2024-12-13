@@ -45,7 +45,9 @@ def transform_image(image, transform_type, **kwargs):
 
     elif transform_type == 'ekstraksi tepi':
         # Ekstraksi tepi menggunakan Canny
-        return cv2.Canny(image, 100, 200)  # Anda bisa menyesuaikan threshold sesuai kebutuhan
+        threshold1 = kwargs.get('threshold1', 100)
+        threshold2 = kwargs.get('threshold2', 200)
+        return cv2.Canny(image, threshold1, threshold2)
 
 def main():
     st.sidebar.title("Group 7")
@@ -179,10 +181,12 @@ def main():
                      use_container_width=True)
 
             elif transform_type == "ekstraksi tepi":
+                # Slider untuk threshold Canny
+                threshold1 = st.slider("Threshold 1", min_value=0, max_value=255, value=100, step=1)
+                threshold2 = st.slider("Threshold 2", min_value=0, max_value=255, value=200, step=1)
+                
                 # Ekstraksi tepi
-                gambar_transformed = transform_image(gambar_asli, transform_type)
-                with col2:
-                    st.image(gambar_transformed, caption="Ekstraksi Tepi", use_container_width=True)
+                gambar_transformed = transform_image(gambar_asli, transform_type, threshold1=threshold1, threshold2=threshold2)
         
             if gambar_transformed is not None:
                 # Simpan gambar yang ditransformasikan ke dalam buffer
