@@ -279,10 +279,10 @@ def main():
         st.subheader("Hasil Deteksi Objek")
         st.image(cv2.cvtColor(gambar_asli, cv2.COLOR_BGR2RGB), caption="Gambar dengan Deteksi Objek", use_container_width=True)
             
-            if gambar_ekstraksi_gambar is not None:
-                # Simpan gambar hasil ekstraksi tepi ke dalam buffer
-                _, buffer = cv2.imencode('.png', gambar_ekstraksi_gambar)
-                img_bytes = buffer.tobytes()
+        if gambar_ekstraksi_gambar is not None:
+            # Simpan gambar hasil ekstraksi tepi ke dalam buffer
+            _, buffer = cv2.imencode('.png', gambar_ekstraksi_gambar)
+            img_bytes = buffer.tobytes()
 
                 # Tombol untuk mengunduh gambar hasil ekstraksi tepi
                 st.download_button(
