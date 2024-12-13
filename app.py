@@ -214,6 +214,9 @@ def main():
             pil_image = Image.open(uploaded_file)
             metadata = extract_metadata(pil_image)
 
+            # Dapatkan warna dominan
+            dominant_color = get_dominant_color(gambar_asli)
+
             # Kolom untuk menampilkan gambar asli dan hasil ekstraksi tepi
             col1, col2 = st.columns(2)
 
@@ -237,6 +240,10 @@ def main():
             for key, value in metadata.items():
                 st.write(f"{key}: {value}")
 
+            # Tampilkan warna dominan
+            st.subheader("Warna Dominan")
+            st.write(f"Warna dominan dalam gambar adalah: {dominant_color}")
+            st.markdown(f"<div style='width: 100px; height: 100px; background-color: rgb({dominant_color[0]}, {dominant_color[1]}, {dominant_color[2]});'></div>", unsafe_allow_html=True)
             
         if gambar_ekstraksi_gambar is not None:
             # Simpan gambar hasil ekstraksi tepi ke dalam buffer
