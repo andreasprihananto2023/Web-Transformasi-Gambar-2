@@ -263,14 +263,14 @@ def main():
             for key, value in metadata.items():
                 st.write(f"{key}: {value}")
 
-            st.write("")
+
             # Tampilkan warna dominan
             st.write(f"Warna dominan: {dominant_color}")
             st.markdown(f"<div style='width: 100px; height: 100px; background-color: rgb({dominant_color[0]}, {dominant_color[1]}, {dominant_color[2]});'></div>", unsafe_allow_html=True)
     
             # Hapus warna non-dominan
             gambar_dominan = remove_non_dominant_colors(gambar_asli, dominant_color)
-        
+            st.write("")        
             
         if gambar_ekstraksi_gambar is not None:
             # Simpan gambar hasil ekstraksi tepi ke dalam buffer
