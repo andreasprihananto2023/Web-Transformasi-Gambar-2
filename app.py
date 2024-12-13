@@ -51,12 +51,17 @@ def main():
         st.write("")
 
     with col2:
-        if st.button("Home Page"):
-            st.session_state.page = "Home Page"
-            st.experimental_rerun()
-        if st.button("Transformasi Gambar"):
-            st.session_state.page = "Transformasi Gambar"
-            st.experimental_rerun()
+        # Membuat dua kolom untuk tombol
+        button_col1, button_col2 = st.columns(2)
+        with button_col1:
+            if st.button("Home Page"):
+                st.session_state.page = "Home Page"
+                st.experimental_rerun()
+        
+        with button_col2:
+            if st.button("Transformasi Gambar"):
+                st.session_state.page = "Transformasi Gambar"
+                st.experimental_rerun()
 
     if st.session_state.page == "Home Page":
         # Membuat dua kolom
