@@ -2,8 +2,6 @@ import streamlit as st
 import cv2
 import numpy as np
 
-logo_url = "https://github.com/andreasprihananto2023/Web-Transformasi-Gambar-2/blob/main/logo_pu.png"
-
 st.set_page_config(initial_sidebar_state="collapsed")
 
 # Kompres gambar
@@ -49,7 +47,7 @@ def main():
     if 'page' not in st.session_state:
         st.session_state.page = "Home Page"
 
-    page = st.sidebar.radio("Pilih Halaman", ["Home Page", "Transformasi Gambar", "Ekstraksi Tepi"], index=["Home Page", "Transformasi Gambar", "Ekstraksi Tepi"].index(st.session_state.page))
+    page = st.sidebar.radio("Pilih Halaman", ["Home Page", "Transformasi Geometrik", "Ekstraksi Tepi"], index=["Home Page", "Transformasi Geometrik", "Ekstraksi Tepi"].index(st.session_state.page))
     
     # Update session state with the selected page
     st.session_state.page = page
@@ -69,7 +67,7 @@ def main():
             st.markdown("<h2 style='font-size: 28px;'>Aljabar Linear - Teknik Industri</h2>", unsafe_allow_html=True)
         
         st.title("Selamat Datang di Website Transformasi Gambar Group 7")    
-        st.write("Website ini memungkinkan untuk mengunggah gambar dan menerapkan berbagai transformasi Geometrik. Dibuat oleh Andreas, Firdaus, Rizki")
+        st.write("Website ini memungkinkan untuk mengunggah gambar dan menerapkan berbagai transformasi Gambar menggunakan Python. Dibuat oleh Andreas, Firdaus, Rizki")
         st.write(" ")
         col1, col2, col3 = st.columns([1, 1, 1])
 
@@ -83,10 +81,10 @@ def main():
         st.write("")
         st.write("Klik tombol di bawah untuk mulai.")
         if st.button("Mulai Transformasi"):
-            st.session_state.page = "Transformasi Gambar"
+            st.session_state.page = "Transformasi Geometrik"
             st.rerun()
 
-    elif st.session_state.page == "Transformasi Gambar":
+    elif st.session_state.page == "Transformasi Geometrik":
         # Tambahkan tombol kembali ke halaman utama
         if st.button("Kembali ke Halaman Utama"):
             st.session_state.page = "Home Page"
