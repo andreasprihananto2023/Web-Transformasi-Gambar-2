@@ -89,6 +89,17 @@ def get_dominant_color(image, k=5):
     
     return unique_colors[dominant_color_index]
 
+def remove_non_dominant_colors(image, dominant_color, threshold=60):
+    # Buat batas bawah dan atas untuk warna dominan
+    lower_bound = np.array([max(0, c - threshold) for c in dominant_color])
+    upper_bound = np.array([min(255, c + threshold) for c in dominant_color])
+    
+    # Buat mask untuk warna yang dekat dengan warna dominan
+    mask = cv2.inRange(image, lower_bound, upper_bound)
+    
+    # Buat gambar output dengan warna non-dominan diatur ke putih
+    output_image = np.full(image.shape, 255, dtype=np.uint8
+
 def main():
     st.sidebar.title("Group 7")
     if 'page' not in st.session_state:
