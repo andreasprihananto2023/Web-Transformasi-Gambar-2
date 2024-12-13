@@ -88,7 +88,7 @@ def main():
                 st.rerun()
         with col2:
             if st.button("Ekstrasi Tepi"):
-                st.session_stage.page = "Ekstrasi Tepi"
+                st.session_stage.page = "Ekstraksi Tepi"
                 st.rerun()
 
     elif st.session_state.page == "Transformasi Geometrik":
