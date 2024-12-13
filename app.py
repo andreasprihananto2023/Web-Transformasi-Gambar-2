@@ -294,7 +294,7 @@ def main():
             label="Unduh Sebaran Warna Dominan",
             data=img_bytes_dominan,
             file_name="Warna_dominan.png",
-            mime="image/png"
+            mime="image/png")
 
 if __name__ == "__main__":
     main()
