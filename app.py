@@ -49,7 +49,7 @@ def main():
     col1, col2 = nav_bar.columns([1, 3])  # Kolom untuk logo dan tombol
 
     with col1:
-        st.image("logo_group7.png", caption="Logo Group 7", width=120)  # Ganti dengan path logo Anda
+        st.write("")
 
     with col2:
         if st.button("Home Page"):
