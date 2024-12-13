@@ -42,12 +42,9 @@ def transform_image(image, transform_type, **kwargs):
         return cv2.warpPerspective(image, matriks_distorsi, (w, h))
 
 def main():
-    st.sidebar.title("Navigasi")
-    if 'page' not in st.session_state:
-        st.session_state.page = "Home Page"
-
-
-    page = st.sidebar.radio("Pilih Halaman", ["Home Page", "Transformasi Gambar"], index=["Home Page", "Transformasi Gambar"].index(st.session_state.page))
+    # Navigation bar di atas
+    st.title("Transformasi Gambar")
+    page = st.selectbox("Pilih Halaman", ["Home Page", "Transformasi Gambar"])
     
     # Update session state with the selected page
     st.session_state.page = page
