@@ -248,7 +248,7 @@ def main():
             with col2:
                 st.image(gambar_ekstraksi_gambar, caption="Hasil Ekstraksi Gambar", use_container_width=True)
 
-        with col3:
+            with col3:
             # Hapus warna non-dominan
             gambar_dominan = remove_non_dominant_colors(gambar_asli, dominant_color)
 
