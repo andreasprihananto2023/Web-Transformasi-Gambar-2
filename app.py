@@ -1,6 +1,8 @@
 import streamlit as st
 import cv2
 import numpy as np
+from PIL import Image
+import io
 
 st.set_page_config(initial_sidebar_state="collapsed")
 
@@ -51,6 +53,16 @@ def transform_image(image, dx=0, dy=0, sudut=0, skala_x=1.0, skala_y=1.0, skew_x
 
 def edge_detection(image, threshold1=100, threshold2=200):
     return cv2.Canny(image, threshold1, threshold2)
+
+def extract_metadata(image):
+    metadata = {}
+    if hasattr(image, '_getexif'):
+        exif_data = image._getexif()
+        if exif_data is not None:
+            for tag_id, value in exif_data.items():
+                tag = TAGS.get(tag_id, tag_id)
+                metadata[tag] = value
+    return metadata
 
 def main():
     st.sidebar.title("Group 7")
@@ -172,6 +184,10 @@ def main():
             gambar_asli = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
             gambar_asli = compress_image(gambar_asli)
 
+            # Menggunakan PIL untuk membaca metadata
+            pil_image = Image.open(uploaded_file)
+            metadata = extract_metadata(pil_image)
+
             # Kolom untuk menampilkan gambar asli dan hasil ekstraksi tepi
             col1, col2 = st.columns(2)
 
@@ -188,6 +204,12 @@ def main():
             with col2:
                 st.image(gambar_ekstraksi_gambar, caption="Hasil Ekstraksi Gambar", use_container_width=True)
 
+            # Tampilkan metadata
+            st.subheader("Metadata Gambar")
+            for key, value in metadata.items():
+            st.write(f"{key}: {value}")
+
+            
             if gambar_ekstraksi_gambar is not None:
                 # Simpan gambar hasil ekstraksi tepi ke dalam buffer
                 _, buffer = cv2.imencode('.png', gambar_ekstraksi_gambar)
