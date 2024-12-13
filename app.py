@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 import io
 from PIL.ExifTags import TAGS
-
+from sklearn.cluster import KMeans
 
 st.set_page_config(initial_sidebar_state="collapsed")
 
@@ -70,6 +70,24 @@ def extract_metadata(image):
         metadata['EXIF Data'] = 'No EXIF attribute found'
     return metadata
 
+def get_dominant_color(image, k=5):
+    # Reshape the image to be a list of pixels
+    pixels = image.reshape(-1, 3)
+    
+    # Fit the KMeans model
+    kmeans = KMeans(n_clusters=k)
+    kmeans.fit(pixels)
+    
+    # Get the most common color
+    dominant_color = kmeans.cluster_centers_[kmeans.labels_].astype(int)
+    
+    # Count the occurrences of each color
+    unique_colors, counts = np.unique(dominant_color, axis=0, return_counts=True)
+    
+    # Get the index of the most common color
+    dominant_color_index = counts.argmax()
+    
+    return unique_colors[dominant_color_index]
 
 def main():
     st.sidebar.title("Group 7")
