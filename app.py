@@ -244,6 +244,13 @@ def main():
             st.subheader("Warna Dominan")
             st.write(f"Warna dominan dalam gambar adalah: {dominant_color}")
             st.markdown(f"<div style='width: 100px; height: 100px; background-color: rgb({dominant_color[0]}, {dominant_color[1]}, {dominant_color[2]});'></div>", unsafe_allow_html=True)
+    
+            # Hapus warna non-dominan
+            gambar_dominan = remove_non_dominant_colors(gambar_asli, dominant_color)
+    
+            # Tampilkan gambar dengan warna dominan saja
+            st.subheader("Gambar dengan Warna Dominan Saja")
+            st.image(cv2.cvtColor(gambar_dominan, cv2.COLOR_BGR2RGB), caption="Gambar dengan Warna Dominan", use_container_width=True)
             
         if gambar_ekstraksi_gambar is not None:
             # Simpan gambar hasil ekstraksi tepi ke dalam buffer
