@@ -254,8 +254,7 @@ def main():
 
             # Tampilkan gambar dengan warna dominan saja
                 if gambar_dominan is not None and gambar_dominan.size > 0:
-                    st.subheader("Gambar dengan Warna Dominan Saja")
-                    st.image(cv2.cvtColor(gambar_dominan, cv2.COLOR_BGR2RGB), caption="Gambar dengan Warna Dominan", use_container_width=True)
+                    st.image(cv2.cvtColor(gambar_dominan, cv2.COLOR_BGR2RGB), caption="Warna Dominan", use_container_width=True)
                 else:
                     st.error("Gambar dengan warna dominan tidak dapat ditampilkan.")
             
