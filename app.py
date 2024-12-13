@@ -284,12 +284,12 @@ def main():
             _, buffer = cv2.imencode('.png', gambar_ekstraksi_gambar)
             img_bytes = buffer.tobytes()
 
-                # Tombol untuk mengunduh gambar hasil ekstraksi tepi
-                st.download_button(
-                    label="Unduh Hasil Ekstraksi Gambar",
-                    data=img_bytes,
-                    file_name="hasil_ekstraksi_gambar.png",
-                    mime="image/png")
+            # Tombol untuk mengunduh gambar hasil ekstraksi tepi
+            st.download_button(
+                label="Unduh Hasil Ekstraksi Gambar",
+                data=img_bytes,
+                file_name="hasil_ekstraksi_gambar.png",
+                mime="image/png")
 
 if __name__ == "__main__":
     main()
