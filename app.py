@@ -186,6 +186,7 @@ def main():
 
         st.title("Ekstraksi Gambar")
         uploaded_file = st.file_uploader("Unggah Gambar untuk Ekstraksi Gambar", type=["jpg", "jpeg", "png"])
+        gambar_ekstraksi_gambar = None
         if uploaded_file is not None:
             # Decode gambar
             gambar_asli = cv2.imdecode(np.frombuffer(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
