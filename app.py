@@ -207,7 +207,7 @@ def main():
             # Tampilkan metadata
             st.subheader("Metadata Gambar")
             for key, value in metadata.items():
-            st.write(f"{key}: {value}")
+                st.write(f"{key}: {value}")
 
             
             if gambar_ekstraksi_gambar is not None:
