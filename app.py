@@ -98,7 +98,7 @@ def remove_non_dominant_colors(image, dominant_color, threshold=60):
     mask = cv2.inRange(image, lower_bound, upper_bound)
     
     # Buat gambar output dengan warna non-dominan diatur ke putih
-    output_image = np.full(image.shape, 255, dtype=np.uint8
+    output_image = np.full(image.shape, 255, dtype=np.uint8)
 
 def main():
     st.sidebar.title("Group 7")
