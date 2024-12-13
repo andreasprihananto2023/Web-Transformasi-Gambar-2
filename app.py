@@ -37,7 +37,7 @@ def transform_image(image, dx=0, dy=0, sudut=0, skala_x=1.0, skala_y=1.0, skew_x
     matriks_distorsi = cv2.getPerspectiveTransform(pts1, pts2)
     image = cv2.warpPerspective(image, matriks_distorsi, (w, h))
 
-        if blur_kernel > 1:
+    if blur_kernel > 1:
         image = cv2.GaussianBlur(image, (blur_kernel, blur_kernel), 0)
 
     # Saturasi
