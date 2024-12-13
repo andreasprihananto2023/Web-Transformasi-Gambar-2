@@ -6,7 +6,11 @@ import io
 from PIL.ExifTags import TAGS
 from sklearn.cluster import KMeans
 
-st.set_page_config(initial_sidebar_state="collapsed")
+st.set_page_config(
+    page_title="Image Processing Group 7",
+    page_icon="logo_pu.png",
+    initial_sidebar_state="collapsed")
+
 
 # Kompres gambar
 @st.cache_data
