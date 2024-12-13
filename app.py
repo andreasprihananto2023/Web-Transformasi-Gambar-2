@@ -2,6 +2,8 @@ import streamlit as st
 import cv2
 import numpy as np
 
+logo_url = "https://github.com/andreasprihananto2023/Web-Transformasi-Gambar-2/blob/main/logo_pu.png"
+
 st.set_page_config(initial_sidebar_state="collapsed")
 
 # Kompres gambar
