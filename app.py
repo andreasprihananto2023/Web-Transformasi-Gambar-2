@@ -14,7 +14,7 @@ def compress_image(image, max_size=(800, 800)):
 
 # Caching
 @st.cache_data
-def transform_image(image, dx=0, dy=0, sudut=0, skala_x=1.0, skala_y=1.0, skew_x=0, skew_y=0):
+def transform_image(image, dx=0, dy=0, sudut=0, skala_x=1.0, skala_y=1.0, skew_x=0, skew_y=0, blur_kernel=1, saturation=1.0):
     # Translasi
     matriks_translasi = np.float32([[1, 0, dx], [0, 1, dy]])
     image = cv2.warpAffine(image, matriks_translasi, (image.shape[1], image.shape[0]))
@@ -37,6 +37,7 @@ def transform_image(image, dx=0, dy=0, sudut=0, skala_x=1.0, skala_y=1.0, skew_x
     matriks_distorsi = cv2.getPerspectiveTransform(pts1, pts2)
     image = cv2.warpPerspective(image, matriks_distorsi, (w, h))
 
+    # Gaussian Blur
     if blur_kernel > 1:
         image = cv2.GaussianBlur(image, (blur_kernel, blur_kernel), 0)
 
@@ -45,7 +46,7 @@ def transform_image(image, dx=0, dy=0, sudut=0, skala_x=1.0, skala_y=1.0, skew_x
         hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         hsv_image[..., 1] = np.clip(hsv_image[..., 1] * saturation, 0, 255)  # Mengatur saturasi
         image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2BGR)
-        
+
     return image
 
 def edge_detection(image, threshold1=100, threshold2=200):
@@ -81,11 +82,11 @@ def main():
         col1, col2, col3 = st.columns([1, 1, 1])
 
         with col1:
-            st.image("foto rizki.jpg", caption="Ahmad Rizki Safei", use_container_width=True)
+            st.image("foto_rizki.jpg", caption="Ahmad Rizki Safei", use_container_width=True)
         with col2:
-            st.image("foto andre.jpg", caption="Andreas Prihananto", use_container_width=True)
+            st.image("foto_andre.jpg", caption="Andreas Prihananto", use_container_width=True)
         with col3:
-            st.image("foto firdaus.jpg", caption="Firdaus Bachtiar", use_container_width=True)
+            st.image("foto_firdaus.jpg", caption="Firdaus Bachtiar", use_container_width=True)
 
         st.write("")
         st.write("Klik tombol di bawah untuk mulai.")
@@ -139,7 +140,7 @@ def main():
 
             # Slider untuk saturasi
             saturation = st.slider("Saturasi", min_value=0.0, max_value=3.0, value=1.0, step=0.1)
-            
+
             # Terapkan semua transformasi
             gambar_transformed = transform_image(gambar_asli, dx=dx, dy=dy, sudut=sudut, skala_x=skala_x, skala_y=skala_y, skew_x=skew_x, skew_y=skew_y, blur_kernel=blur_kernel, saturation=saturation)
 
