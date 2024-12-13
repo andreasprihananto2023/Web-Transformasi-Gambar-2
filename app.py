@@ -42,7 +42,6 @@ def transform_image(image, transform_type, **kwargs):
 
 def main():
     # Navigation bar di atas
-    st.title("Transformasi Gambar")
     
     # Membuat layout untuk navigation bar
     nav_bar = st.container()
