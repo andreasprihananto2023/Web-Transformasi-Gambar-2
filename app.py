@@ -200,6 +200,7 @@ def main():
             with col1:
                 st.image(cv2.cvtColor(gambar_asli, cv2.COLOR_BGR2RGB), caption="Gambar Asli", use_container_width=True)
 
+            st.write("Atur Sensitivitas Ekstraksi")
             # Slider untuk threshold Canny
             threshold1 = st.slider("Threshold 1", min_value=0, max_value=255, value=100, step=1)
             threshold2 = st.slider("Threshold 2", min_value=0, max_value=255, value=200, step=1)
