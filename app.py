@@ -264,8 +264,7 @@ def main():
                 st.write(f"{key}: {value}")
 
             # Tampilkan warna dominan
-            st.subheader("Warna Dominan")
-            st.write(f"Warna dominan dalam gambar adalah: {dominant_color}")
+            st.write(f"Warna dominan: {dominant_color}")
             st.markdown(f"<div style='width: 100px; height: 100px; background-color: rgb({dominant_color[0]}, {dominant_color[1]}, {dominant_color[2]});'></div>", unsafe_allow_html=True)
     
             # Hapus warna non-dominan
